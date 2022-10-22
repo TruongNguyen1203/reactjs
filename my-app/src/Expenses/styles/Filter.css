@@ -1,0 +1,20 @@
+.filter_control {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 10px 0 10px;
+    width: 95%;
+    align-items: center;
+    height: 100px;
+}
+
+.filter_control label{
+    font-weight: bold
+}
+
+.filter_control select{
+    font: inherit;
+    padding: 10px 30px;
+    font-weight: bold;
+    border-radius: 6px;
+}

@@ -1,0 +1,19 @@
+.new-expense {
+    width: 50rem;
+    background-color: #a892ee;
+    padding: 1rem;
+    margin: 20px auto;
+    border-radius: 12px;
+    text-align: center;
+}
+
+button{
+    background-color: #40005d;
+    border: 1px solid #40005d;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font: inherit;
+    color: white;
+    margin-right: 1rem;
+    cursor: pointer;
+}
