@@ -36,6 +36,10 @@ button{
     padding: 10px 40px;
     border-radius: 50px;
     border: none;
-    background: #888888;
+    background: purple;
     cursor: pointer;
+}
+button:disabled{
+    background: #888888;
+    cursor: default;
 }
