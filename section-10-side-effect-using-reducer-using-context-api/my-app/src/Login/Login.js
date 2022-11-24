@@ -1,16 +1,31 @@
 import "./Login.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
+
+const emailReducer = (state, action) => {
+  if(action.type == "USER_INPUT"){
+    return {value: action.value, isValid: action.value.includes("@")}
+  }
+
+  return {value: " ", isValid: false}
+}
+
+const passwordReducer = (state, action) => {
+  if(action.type == "USER_INPUT"){
+    return {value: action.value, isValid: action.value.trim().length > 6 }
+  }
+
+  return {value: " ", isValid: false}
+}
 const Login = (props) => {
-  const [enterEmail, setEnterEmail] = useState("");
-  const [enterPassword, setEnterPassword] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
 
   const handlerEmailChange = (e) => {
-    setEnterEmail(e.target.value);
+    dispatchEmail({type: "USER_INPUT", value: e.target.value})
+
   };
 
   const handlerPasswordChange = (e) => {
-    setEnterPassword(e.target.value);
+    dispatchPassword({type:"USER_INPUT", value: e.target.value})
   };
   const handleLogin = (e) => {
     e.preventDefault();
@@ -18,10 +33,23 @@ const Login = (props) => {
     props.onLogin();
   };
 
+  const [emailState, dispatchEmail] = useReducer(emailReducer, {
+    value: "",
+    isValid: false
+  });
+  const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
+    value: "",
+    isValid: false
+  });
+
+  const {isValid: isEmailValid} = emailState;
+  const {isValid: isPasswordValid} = passwordState;
+
+
   useEffect(() => {
     const identifier = setTimeout(() => {
       console.log("Check valid form");
-      if (enterEmail.includes("@") && enterPassword.length > 6) {
+      if ( isEmailValid && isPasswordValid) {
         console.log("true");
         setIsFormValid(true);
       }
@@ -31,12 +59,14 @@ const Login = (props) => {
       console.log("ClEANUP");
       clearTimeout(identifier);
     }
-  }, [enterEmail, enterPassword]);
+  }, [isEmailValid, isPasswordValid]);
+
+
   return (
     <form className="login-form">
       <div className="input-control">
         <label>Email</label>
-        <input type="email" name="email" onChange={handlerEmailChange}></input>
+        <input type="email" name="email" onChange={handlerEmailChange} ></input>
       </div>
       <div className="input-control">
         <label>Password</label>
