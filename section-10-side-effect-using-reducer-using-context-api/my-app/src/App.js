@@ -4,19 +4,20 @@ import MainHeader from "./MainHeader/MainHeader";
 import Login from "./Login/Login";
 import Home from "./Home/Home";
 import { useState, useEffect } from "react";
+import AuthContext from "./store/authentication-context";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
   const handleLogin = () => {
     setIsLogin(true);
-    localStorage.setItem("isLogin", "1")
-  }
+    localStorage.setItem("isLogin", "1");
+  };
 
   const handleLogout = () => {
     setIsLogin(false);
-    localStorage.removeItem('isLogin')
-  }
+    localStorage.removeItem("isLogin");
+  };
 
   useEffect(() => {
     if (localStorage.getItem("isLogin") == "1") {
@@ -24,10 +25,10 @@ function App() {
     }
   }, [isLogin]);
   return (
-    <>
-      <MainHeader isLogin={isLogin} onLogout={handleLogout}></MainHeader>
+    <AuthContext.Provider value={{ isLogined: isLogin }}>
+      <MainHeader onLogout={handleLogout}></MainHeader>
       {isLogin ? <Home></Home> : <Login onLogin={handleLogin}></Login>}
-    </>
+    </AuthContext.Provider>
   );
 }
 
