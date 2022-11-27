@@ -1,7 +1,7 @@
 import "./MainHeader.css";
 import AuthContext from "../store/authentication-context";
 import { useContext } from "react";
-const MainHeader = (props) => {
+const MainHeader = () => {
   const ctx = useContext(AuthContext)
   return (
     <div className="nav-bar">
@@ -10,7 +10,7 @@ const MainHeader = (props) => {
         <div>
           <a>Users</a>
           <a>Admin</a>
-          <button onClick={props.onLogout}>Logout</button>
+          <button onClick={ctx.onLogout}>Logout</button>
         </div>
       )}
     </div>
