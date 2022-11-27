@@ -3,32 +3,16 @@ import "./App.css";
 import MainHeader from "./MainHeader/MainHeader";
 import Login from "./Login/Login";
 import Home from "./Home/Home";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "./store/authentication-context";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
-
-  const handleLogin = () => {
-    setIsLogin(true);
-    localStorage.setItem("isLogin", "1");
-  };
-
-  const handleLogout = () => {
-    setIsLogin(false);
-    localStorage.removeItem("isLogin");
-  };
-
-  useEffect(() => {
-    if (localStorage.getItem("isLogin") == "1") {
-      setIsLogin(true);
-    }
-  }, [isLogin]);
+  const ctx = useContext(AuthContext);
   return (
-    <AuthContext.Provider value={{ isLogined: isLogin, onLogout: handleLogout}}>
+    <React.Fragment>
       <MainHeader></MainHeader>
-      {isLogin ? <Home></Home> : <Login onLogin={handleLogin}></Login>}
-    </AuthContext.Provider>
+      {ctx.isLogined ? <Home></Home> : <Login></Login>}
+    </React.Fragment>
   );
 }
 

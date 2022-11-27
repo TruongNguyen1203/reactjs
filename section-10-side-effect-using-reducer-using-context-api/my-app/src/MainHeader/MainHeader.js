@@ -10,7 +10,7 @@ const MainHeader = () => {
         <div>
           <a>Users</a>
           <a>Admin</a>
-          <button onClick={ctx.onLogout}>Logout</button>
+          <button onClick={ctx.handleLogout}>Logout</button>
         </div>
       )}
     </div>

@@ -1,5 +1,6 @@
 import "./Login.css";
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useState, useReducer, useContext } from "react";
+import AuthContext from '../store/authentication-context'
 
 const emailReducer = (state, action) => {
   if(action.type == "USER_INPUT"){
@@ -16,7 +17,8 @@ const passwordReducer = (state, action) => {
 
   return {value: " ", isValid: false}
 }
-const Login = (props) => {
+const Login = () => {
+  const ctx = useContext(AuthContext);
   const [isFormValid, setIsFormValid] = useState(false);
 
   const handlerEmailChange = (e) => {
@@ -29,8 +31,7 @@ const Login = (props) => {
   };
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log("n");
-    props.onLogin();
+    ctx.handleLogin();
   };
 
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
