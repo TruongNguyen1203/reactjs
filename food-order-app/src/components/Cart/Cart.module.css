@@ -1,0 +1,115 @@
+.backdrop {
+    background: rgba(0, 0, 0, 0.75);
+    width: 100%;
+    height: 100vh;
+    z-index: 11;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.card {
+    background: white;
+    width: 40%;
+    height: 320px;
+    margin: auto;
+    border: 1px solid white;
+    border-radius: 12px;
+    padding: 30px 10px;
+    position: fixed;
+    top: 30vh;
+    animation: slide-down 300ms ease-out forwards;
+    left: 30%
+}
+
+.item-container {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #8a2b06;
+
+}
+
+.item-info{
+    margin-bottom: 10px;
+    width: 100px;
+}
+
+.item-name{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width: 200px;
+}
+
+.item-price{
+    font-size: 14px;
+    font-weight: bold;
+    color: #8a2b06;
+}
+
+.item-price span {
+    border: 1px solid gray;
+    color: black;
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-size: 12px;
+    float: right;
+}
+.item-btn{
+    width: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.item-btn button{
+    border: 1px solid #8a2b06;
+    color: #8a2b06;
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 35px;
+    font-weight: bold;
+    background-color: white;
+    
+}
+
+.item-btn button:hover{
+    color: white;
+    background-color: #8a2b06;
+    cursor: pointer;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0px;
+}
+
+.btn-control{
+    float: right;
+}
+
+.btn-control button{
+    width: 80px;
+    padding: 5px 20px;
+    border-radius: 50px;
+    border: 1px solid #8a2b06;
+    cursor: pointer;
+}
+
+.btn-close{
+    color: #8a2b06;
+    background-color: white;
+    margin-right: 10px;
+}
+
+.btn-order{
+    color: white;
+    background-color: #8a2b06;
+}
+
+.cart-container{
+    height: 200px;
+    overflow: scroll;
+}
