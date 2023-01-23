@@ -19,7 +19,6 @@ function App() {
   }
 
   const onOrderCart = () => {
-    setIsCart(false);
   }
 
   return (

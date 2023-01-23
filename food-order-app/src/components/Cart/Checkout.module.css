@@ -1,0 +1,55 @@
+.container {
+  max-height: 15rem;
+  overflow: scroll;
+}
+
+.container label {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.container input {
+  width: 40%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.container button {
+  width: 100px;
+  padding: 5px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  color: #8a2b06;
+  background-color: white;
+  margin-right: 10px;
+  border: 1px solid white;
+}
+
+.btn-confirm {
+  color: white;
+  background-color: #8a2b06;
+  border: 1px solid #8a2b06;
+
+}
+
+.btn-container {
+    float: right;
+}
+
+.invalid label {
+    color: red;
+}
+
+.invalid input {
+    border: 1px solid rosybrown;
+    background-color: rosybrown;
+}
+
+.invalid p {
+    color: red;
+    font-size: 12px;
+}
