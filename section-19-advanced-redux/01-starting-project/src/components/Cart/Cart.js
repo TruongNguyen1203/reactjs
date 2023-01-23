@@ -8,14 +8,17 @@ const Cart = (props) => {
   return (
     <Card className={classes.cart}>
       <h2>Your Shopping Cart</h2>
-      <ul>
-        {items.map((item,index) => (
-          <CartItem
-            key={index}
-            item={item}
-          />
-        ))}
-      </ul>
+
+      {items.length > 0 && (
+        <ul>
+          {items.map((item, index) => (
+            <CartItem key={index} item={item} />
+          ))}
+        </ul>
+      )}
+      {
+        items.length === 0 && <p>Empty Cart</p>
+      }
     </Card>
   );
 };
