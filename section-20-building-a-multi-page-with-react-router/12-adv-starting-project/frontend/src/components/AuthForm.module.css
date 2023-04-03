@@ -1,0 +1,30 @@
+.form {
+  max-width: 40rem;
+  margin: auto;
+}
+
+.form input {
+  width: 100%;
+  display: block;
+  padding: 0.25rem;
+}
+
+.action {
+  display: flex;
+  justify-content: end;
+  gap: 20px;
+}
+
+.action button {
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: var(--color-gray-300);
+  color: var(--color-gray-800);
+  border: none;
+  font: inherit;
+}
+
+.action button:hover {
+  background-color: var(--color-primary-300);
+}
