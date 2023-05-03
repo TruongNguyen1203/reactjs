@@ -1,5 +1,10 @@
 import EventItem from "../components/EventItem";
-import { json, useLoaderData, useRouteLoaderData, redirect } from "react-router-dom";
+import {
+  json,
+  useRouteLoaderData,
+  redirect,
+} from "react-router-dom";
+import {getAuthToken} from '../utils/auth'
 
 const EventDetailPage = () => {
   var data = useRouteLoaderData("event-detail");
@@ -17,11 +22,15 @@ export async function loader({ params }) {
 }
 
 export async function action({ params, request }) {
+  var token = getAuthToken();
   var response = await fetch("http://localhost:8080/events/" + params.id, {
     method: request.method,
+    headers: {
+      Authorization: "Bear " + token,
+    },
   });
   if (!response.ok) {
     throw json({ message: "Error when delete event" }, { status: 500 });
   }
-  return redirect('/events');
+  return redirect("/events");
 }

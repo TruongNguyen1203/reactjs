@@ -1,7 +1,8 @@
 import { useNavigate, useActionData } from "react-router-dom";
 import { Form } from "react-router-dom";
 import classes from "./EventForm.module.css";
-import { json, redirect } from 'react-router-dom';
+import { json, redirect } from "react-router-dom";
+import { getAuthToken } from "../utils/auth";
 
 function EventForm({ method, event }) {
   const data = useActionData();
@@ -71,35 +72,39 @@ function EventForm({ method, event }) {
 
 export default EventForm;
 
-export async function action({request, params}){
+export async function action({ request, params }) {
   var data = await request.formData();
   var eventData = {
-      title: data.get('title'),
-      image: data.get('image'),
-      date: data.get('date'),
-      description: data.get('description'),
-  }
+    title: data.get("title"),
+    image: data.get("image"),
+    date: data.get("date"),
+    description: data.get("description"),
+  };
   console.log("data: " + JSON.stringify(eventData));
   const method = request.method;
-  let url = 'http://localhost:8080/events/';
-  let eventId = params.id
-  if(method === 'PATCH'){
-    url = url + eventId
+  let url = "http://localhost:8080/events/";
+  let eventId = params.id;
+  if (method === "PATCH") {
+    url = url + eventId;
   }
 
+  var token = getAuthToken();
   var response = await fetch(url, {
-      method: method,
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(eventData)
-  })
+    method: method,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bear " + token,
+    },
+    body: JSON.stringify(eventData),
+  });
 
-  if (response.status == 422){
-      return response;
+  if (response.status == 422) {
+    return response;
   }
 
-  if(!response.ok){
-      throw json({messsage: 'Could not save event' , status: 500})
+  if (!response.ok) {
+    throw json({ messsage: "Could not save event", status: 500 });
   }
 
-  return redirect('/events')
+  return redirect("/events");
 }

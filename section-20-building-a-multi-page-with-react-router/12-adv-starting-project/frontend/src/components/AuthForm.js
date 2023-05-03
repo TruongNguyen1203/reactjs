@@ -1,16 +1,22 @@
-import { useState } from "react";
-import {Form} from 'react-router-dom'
-import classes from './AuthForm.module.css'
+import { Form, useSearchParams, Link, useActionData, useNavigate } from "react-router-dom";
+import classes from "./AuthForm.module.css";
 
 const AuthForm = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const switchModeHandler = () => {
-    setIsLogin(prevState => !prevState);
-  };
+  const [searchParameters] = useSearchParams();
+  const isLogin = searchParameters.get("mode") === "login";
+  const data = useActionData();
+  const navigate = useNavigate();
+  const isSubmitting = navigate.isSubmitting;
   return (
     <>
-      <Form method='post' className={classes.form}>
+      <Form method="POST" className={classes.form}>
         <h1>{isLogin ? "Login" : "Create new account"}</h1>
+        <ul>
+          {data &&
+            data.errors &&
+            Object.values(data.errors).map((err) => <li>{err}</li>)}
+        </ul>
+
         <p>
           <label htmlFor="email">Email</label>
           <input id="email" name="email" type="email"></input>
@@ -20,11 +26,10 @@ const AuthForm = () => {
           <input id="password" name="password" type="password"></input>
         </p>
         <div className={classes.action}>
-          <button onClick={switchModeHandler} type='button'>
-            {" "}
+          <Link to={`?mode=${isLogin ? "signup" : "login"}`}>
             {isLogin ? "Create new account" : "Login"}
-          </button>
-          <button>Save</button>
+          </Link>
+          <button disabled={isSubmitting}>Save</button>
         </div>
       </Form>
     </>
